@@ -1,0 +1,981 @@
+
+I2C_PCF8574_LCD.elf:     file format elf32-avr
+
+Sections:
+Idx Name          Size      VMA       LMA       File off  Algn
+  0 .text         00000412  00000000  00000000  00000074  2**1
+                  CONTENTS, ALLOC, LOAD, READONLY, CODE
+  1 .data         00000020  00800060  00000412  00000486  2**0
+                  CONTENTS, ALLOC, LOAD, DATA
+  2 .stab         000006cc  00000000  00000000  000004a8  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  3 .stabstr      00000085  00000000  00000000  00000b74  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  4 .debug_aranges 000000c0  00000000  00000000  00000c00  2**3
+                  CONTENTS, READONLY, DEBUGGING
+  5 .debug_info   0000097d  00000000  00000000  00000cc0  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  6 .debug_abbrev 00000230  00000000  00000000  0000163d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  7 .debug_line   0000058f  00000000  00000000  0000186d  2**0
+                  CONTENTS, READONLY, DEBUGGING
+  8 .debug_frame  000001d8  00000000  00000000  00001dfc  2**2
+                  CONTENTS, READONLY, DEBUGGING
+  9 .debug_str    00000278  00000000  00000000  00001fd4  2**0
+                  CONTENTS, READONLY, DEBUGGING
+ 10 .debug_loc    0000064e  00000000  00000000  0000224c  2**0
+                  CONTENTS, READONLY, DEBUGGING
+
+Disassembly of section .text:
+
+00000000 <__vectors>:
+   0:	12 c0       	rjmp	.+36     	; 0x26 <__ctors_end>
+   2:	2c c0       	rjmp	.+88     	; 0x5c <__bad_interrupt>
+   4:	2b c0       	rjmp	.+86     	; 0x5c <__bad_interrupt>
+   6:	2a c0       	rjmp	.+84     	; 0x5c <__bad_interrupt>
+   8:	29 c0       	rjmp	.+82     	; 0x5c <__bad_interrupt>
+   a:	28 c0       	rjmp	.+80     	; 0x5c <__bad_interrupt>
+   c:	27 c0       	rjmp	.+78     	; 0x5c <__bad_interrupt>
+   e:	26 c0       	rjmp	.+76     	; 0x5c <__bad_interrupt>
+  10:	25 c0       	rjmp	.+74     	; 0x5c <__bad_interrupt>
+  12:	24 c0       	rjmp	.+72     	; 0x5c <__bad_interrupt>
+  14:	23 c0       	rjmp	.+70     	; 0x5c <__bad_interrupt>
+  16:	22 c0       	rjmp	.+68     	; 0x5c <__bad_interrupt>
+  18:	21 c0       	rjmp	.+66     	; 0x5c <__bad_interrupt>
+  1a:	20 c0       	rjmp	.+64     	; 0x5c <__bad_interrupt>
+  1c:	1f c0       	rjmp	.+62     	; 0x5c <__bad_interrupt>
+  1e:	1e c0       	rjmp	.+60     	; 0x5c <__bad_interrupt>
+  20:	1d c0       	rjmp	.+58     	; 0x5c <__bad_interrupt>
+  22:	1c c0       	rjmp	.+56     	; 0x5c <__bad_interrupt>
+  24:	1b c0       	rjmp	.+54     	; 0x5c <__bad_interrupt>
+
+00000026 <__ctors_end>:
+  26:	11 24       	eor	r1, r1
+  28:	1f be       	out	0x3f, r1	; 63
+  2a:	cf e5       	ldi	r28, 0x5F	; 95
+  2c:	d4 e0       	ldi	r29, 0x04	; 4
+  2e:	de bf       	out	0x3e, r29	; 62
+  30:	cd bf       	out	0x3d, r28	; 61
+
+00000032 <__do_copy_data>:
+  32:	10 e0       	ldi	r17, 0x00	; 0
+  34:	a0 e6       	ldi	r26, 0x60	; 96
+  36:	b0 e0       	ldi	r27, 0x00	; 0
+  38:	e2 e1       	ldi	r30, 0x12	; 18
+  3a:	f4 e0       	ldi	r31, 0x04	; 4
+  3c:	02 c0       	rjmp	.+4      	; 0x42 <__SREG__+0x3>
+  3e:	05 90       	lpm	r0, Z+
+  40:	0d 92       	st	X+, r0
+  42:	a0 38       	cpi	r26, 0x80	; 128
+  44:	b1 07       	cpc	r27, r17
+  46:	d9 f7       	brne	.-10     	; 0x3e <__SP_H__>
+
+00000048 <__do_clear_bss>:
+  48:	10 e0       	ldi	r17, 0x00	; 0
+  4a:	a0 e8       	ldi	r26, 0x80	; 128
+  4c:	b0 e0       	ldi	r27, 0x00	; 0
+  4e:	01 c0       	rjmp	.+2      	; 0x52 <.do_clear_bss_start>
+
+00000050 <.do_clear_bss_loop>:
+  50:	1d 92       	st	X+, r1
+
+00000052 <.do_clear_bss_start>:
+  52:	a0 38       	cpi	r26, 0x80	; 128
+  54:	b1 07       	cpc	r27, r17
+  56:	e1 f7       	brne	.-8      	; 0x50 <.do_clear_bss_loop>
+  58:	88 d1       	rcall	.+784    	; 0x36a <main>
+  5a:	d9 c1       	rjmp	.+946    	; 0x40e <_exit>
+
+0000005c <__bad_interrupt>:
+  5c:	d1 cf       	rjmp	.-94     	; 0x0 <__vectors>
+
+0000005e <i2c_write>:
+
+#ifndef TWI_M8_H_
+#define TWI_M8_H_
+
+void i2c_write(unsigned char data){
+	TWDR = data;
+  5e:	83 b9       	out	0x03, r24	; 3
+	TWCR = ( 1 << TWINT ) | ( 1 << TWEN );		// Clear TWINT bit and Enable I2C
+  60:	84 e8       	ldi	r24, 0x84	; 132
+  62:	86 bf       	out	0x36, r24	; 54
+	while( ( TWCR & ( 1 << TWINT ) ) == 0 );
+  64:	06 b6       	in	r0, 0x36	; 54
+  66:	07 fe       	sbrs	r0, 7
+  68:	fd cf       	rjmp	.-6      	; 0x64 <i2c_write+0x6>
+}
+  6a:	08 95       	ret
+
+0000006c <i2c_read>:
+
+unsigned char i2c_read(unsigned char moreBytes ){
+	if ( moreBytes == 0 )
+  6c:	88 23       	and	r24, r24
+  6e:	19 f4       	brne	.+6      	; 0x76 <i2c_read+0xa>
+	TWCR = ( 1 << TWINT ) | ( 1 << TWEN ) | ( 1 << TWEA );	// Read more than one bytes
+  70:	84 ec       	ldi	r24, 0xC4	; 196
+  72:	86 bf       	out	0x36, r24	; 54
+  74:	02 c0       	rjmp	.+4      	; 0x7a <i2c_read+0xe>
+	else
+	TWCR = ( 1 << TWINT ) | ( 1 << TWEN );		// Read only one byte
+  76:	84 e8       	ldi	r24, 0x84	; 132
+  78:	86 bf       	out	0x36, r24	; 54
+	
+	while( (TWCR & ( 1 << TWINT )) == 0 );		// Wait to complete
+  7a:	06 b6       	in	r0, 0x36	; 54
+  7c:	07 fe       	sbrs	r0, 7
+  7e:	fd cf       	rjmp	.-6      	; 0x7a <i2c_read+0xe>
+	return (TWDR);
+  80:	83 b1       	in	r24, 0x03	; 3
+}
+  82:	08 95       	ret
+
+00000084 <i2c_start>:
+
+void i2c_start(){
+	TWCR = ( 1 << TWINT ) | ( 1 << TWSTA ) | ( 1 << TWEN );
+  84:	84 ea       	ldi	r24, 0xA4	; 164
+  86:	86 bf       	out	0x36, r24	; 54
+	while( ( TWCR & ( 1 << TWINT ) ) == 0 );
+  88:	06 b6       	in	r0, 0x36	; 54
+  8a:	07 fe       	sbrs	r0, 7
+  8c:	fd cf       	rjmp	.-6      	; 0x88 <i2c_start+0x4>
+}
+  8e:	08 95       	ret
+
+00000090 <i2c_stop>:
+void i2c_stop(){
+	TWCR = ( 1 << TWINT ) | ( 1 << TWEN ) | ( 1 << TWSTO );
+  90:	84 e9       	ldi	r24, 0x94	; 148
+  92:	86 bf       	out	0x36, r24	; 54
+}
+  94:	08 95       	ret
+
+00000096 <i2c_showError>:
+void i2c_showError( uint8_t er ){
+	DDRD = 0xFF;
+  96:	9f ef       	ldi	r25, 0xFF	; 255
+  98:	91 bb       	out	0x11, r25	; 17
+	PORTD = er;
+  9a:	82 bb       	out	0x12, r24	; 18
+}
+  9c:	08 95       	ret
+
+0000009e <i2c_readStatus>:
+uint8_t i2c_readStatus(){
+	uint8_t status;
+	status = TWSR & 0xF8 ;		// Mask the lower 3 bits
+  9e:	81 b1       	in	r24, 0x01	; 1
+	return status;
+}
+  a0:	88 7f       	andi	r24, 0xF8	; 248
+  a2:	08 95       	ret
+
+000000a4 <i2c_init>:
+void i2c_init(  ){
+	TWSR = 0x00;		// 0x00
+  a4:	11 b8       	out	0x01, r1	; 1
+	TWBR = 0x47;		// 0x47
+  a6:	87 e4       	ldi	r24, 0x47	; 71
+  a8:	80 b9       	out	0x00, r24	; 0
+	TWCR = 0x04;
+  aa:	84 e0       	ldi	r24, 0x04	; 4
+  ac:	86 bf       	out	0x36, r24	; 54
+}
+  ae:	08 95       	ret
+
+000000b0 <expanderWrite>:
+#define CURSOR_NONE		0b00000000
+
+//#define lcdType20x4
+#define lcdType16x2
+
+void expanderWrite(uint8_t _data){
+  b0:	cf 93       	push	r28
+  b2:	c8 2f       	mov	r28, r24
+	i2c_start();
+  b4:	e7 df       	rcall	.-50     	; 0x84 <i2c_start>
+	i2c_write( 0x4E  );
+  b6:	8e e4       	ldi	r24, 0x4E	; 78
+  b8:	d2 df       	rcall	.-92     	; 0x5e <i2c_write>
+	i2c_write( _data | _backlight  );
+  ba:	8c 2f       	mov	r24, r28
+  bc:	88 60       	ori	r24, 0x08	; 8
+  be:	cf df       	rcall	.-98     	; 0x5e <i2c_write>
+	i2c_stop();
+  c0:	e7 df       	rcall	.-50     	; 0x90 <i2c_stop>
+}
+  c2:	cf 91       	pop	r28
+  c4:	08 95       	ret
+
+000000c6 <expanderRead>:
+uint8_t expanderRead( ){
+  c6:	cf 93       	push	r28
+	uint8_t readByte;
+	
+	i2c_start();
+  c8:	dd df       	rcall	.-70     	; 0x84 <i2c_start>
+	i2c_write( 0x4F );
+  ca:	8f e4       	ldi	r24, 0x4F	; 79
+  cc:	c8 df       	rcall	.-112    	; 0x5e <i2c_write>
+	
+	readByte = i2c_read( 1 );
+  ce:	81 e0       	ldi	r24, 0x01	; 1
+  d0:	cd df       	rcall	.-102    	; 0x6c <i2c_read>
+  d2:	c8 2f       	mov	r28, r24
+	
+	i2c_stop();
+  d4:	dd df       	rcall	.-70     	; 0x90 <i2c_stop>
+	
+	return readByte;
+}
+  d6:	8c 2f       	mov	r24, r28
+  d8:	cf 91       	pop	r28
+  da:	08 95       	ret
+
+000000dc <pulseWrite>:
+
+void pulseWrite( uint8_t portPulse ){
+  dc:	cf 93       	push	r28
+	
+	portPulse |=  EN ;
+  de:	c8 2f       	mov	r28, r24
+  e0:	c4 60       	ori	r28, 0x04	; 4
+	expanderWrite( portPulse ) ;
+  e2:	8c 2f       	mov	r24, r28
+  e4:	e5 df       	rcall	.-54     	; 0xb0 <expanderWrite>
+    can be achieved.
+*/
+void
+_delay_loop_1(uint8_t __count)
+{
+	__asm__ volatile (
+  e6:	81 e0       	ldi	r24, 0x01	; 1
+  e8:	8a 95       	dec	r24
+  ea:	f1 f7       	brne	.-4      	; 0xe8 <pulseWrite+0xc>
+	_delay_loop_1(1);
+	portPulse &= ~EN;
+	expanderWrite( portPulse );
+  ec:	8c 2f       	mov	r24, r28
+  ee:	8b 7f       	andi	r24, 0xFB	; 251
+  f0:	df df       	rcall	.-66     	; 0xb0 <expanderWrite>
+}
+  f2:	cf 91       	pop	r28
+  f4:	08 95       	ret
+
+000000f6 <sendByte>:
+
+void sendByte( uint8_t byte , uint8_t mode ){
+  f6:	1f 93       	push	r17
+  f8:	cf 93       	push	r28
+  fa:	df 93       	push	r29
+  fc:	18 2f       	mov	r17, r24
+  fe:	d6 2f       	mov	r29, r22
+	
+	uint8_t mask_lower_nibble , swap_mask_Lower_nibble , read_port;
+	
+	mask_lower_nibble = byte;
+	swap_mask_Lower_nibble =   ( byte << 4 ) & 0xF0 ;		// Shift 4 place to the left and Mask lower byte -> SWAP and MASK
+ 100:	c8 2f       	mov	r28, r24
+ 102:	c2 95       	swap	r28
+ 104:	c0 7f       	andi	r28, 0xF0	; 240
+	
+	mask_lower_nibble		&=	0xF0;			// Mask lower nibble
+	
+	read_port		=	expanderRead();
+ 106:	df df       	rcall	.-66     	; 0xc6 <expanderRead>
+	read_port		&=	0b00001101;
+ 108:	8d 70       	andi	r24, 0x0D	; 13
+	uint8_t mask_lower_nibble , swap_mask_Lower_nibble , read_port;
+	
+	mask_lower_nibble = byte;
+	swap_mask_Lower_nibble =   ( byte << 4 ) & 0xF0 ;		// Shift 4 place to the left and Mask lower byte -> SWAP and MASK
+	
+	mask_lower_nibble		&=	0xF0;			// Mask lower nibble
+ 10a:	10 7f       	andi	r17, 0xF0	; 240
+	
+	read_port		=	expanderRead();
+	read_port		&=	0b00001101;
+	read_port		|=	mask_lower_nibble;
+ 10c:	18 2b       	or	r17, r24
+	expanderWrite( read_port );
+ 10e:	81 2f       	mov	r24, r17
+ 110:	cf df       	rcall	.-98     	; 0xb0 <expanderWrite>
+
+	if( mode == CMD ){
+ 112:	dd 23       	and	r29, r29
+ 114:	71 f4       	brne	.+28     	; 0x132 <sendByte+0x3c>
+		read_port &= ~( RS ) ;		// RS = 0 -> CMD
+ 116:	1e 7f       	andi	r17, 0xFE	; 254
+		expanderWrite( read_port );
+ 118:	81 2f       	mov	r24, r17
+ 11a:	ca df       	rcall	.-108    	; 0xb0 <expanderWrite>
+	if( mode == DATA ){
+		read_port |= (  RS ) ;		// RS = 1 -> DATA
+		expanderWrite( read_port );
+		
+	}
+	pulseWrite( read_port );
+ 11c:	81 2f       	mov	r24, r17
+ 11e:	de df       	rcall	.-68     	; 0xdc <pulseWrite>
+	
+	// SECOND HALF
+	read_port		=	expanderRead();
+ 120:	d2 df       	rcall	.-92     	; 0xc6 <expanderRead>
+	read_port		&=	0b00001101;
+ 122:	8d 70       	andi	r24, 0x0D	; 13
+	read_port		|=	swap_mask_Lower_nibble;
+ 124:	c8 2b       	or	r28, r24
+	expanderWrite( read_port );
+ 126:	8c 2f       	mov	r24, r28
+ 128:	c3 df       	rcall	.-122    	; 0xb0 <expanderWrite>
+	
+	if( mode == CMD ){
+		read_port &= ~(  RS ) ;		// RS = 0 -> CMD
+ 12a:	ce 7f       	andi	r28, 0xFE	; 254
+		expanderWrite( read_port );
+ 12c:	8c 2f       	mov	r24, r28
+ 12e:	c0 df       	rcall	.-128    	; 0xb0 <expanderWrite>
+ 130:	19 c0       	rjmp	.+50     	; 0x164 <sendByte+0x6e>
+
+	if( mode == CMD ){
+		read_port &= ~( RS ) ;		// RS = 0 -> CMD
+		expanderWrite( read_port );
+	}
+	if( mode == DATA ){
+ 132:	d1 30       	cpi	r29, 0x01	; 1
+ 134:	59 f4       	brne	.+22     	; 0x14c <sendByte+0x56>
+		read_port |= (  RS ) ;		// RS = 1 -> DATA
+ 136:	11 60       	ori	r17, 0x01	; 1
+		expanderWrite( read_port );
+ 138:	81 2f       	mov	r24, r17
+ 13a:	ba df       	rcall	.-140    	; 0xb0 <expanderWrite>
+		
+	}
+	pulseWrite( read_port );
+ 13c:	81 2f       	mov	r24, r17
+ 13e:	ce df       	rcall	.-100    	; 0xdc <pulseWrite>
+	
+	// SECOND HALF
+	read_port		=	expanderRead();
+ 140:	c2 df       	rcall	.-124    	; 0xc6 <expanderRead>
+	read_port		&=	0b00001101;
+ 142:	8d 70       	andi	r24, 0x0D	; 13
+	read_port		|=	swap_mask_Lower_nibble;
+ 144:	c8 2b       	or	r28, r24
+	expanderWrite( read_port );
+ 146:	8c 2f       	mov	r24, r28
+ 148:	b3 df       	rcall	.-154    	; 0xb0 <expanderWrite>
+ 14a:	09 c0       	rjmp	.+18     	; 0x15e <sendByte+0x68>
+	if( mode == DATA ){
+		read_port |= (  RS ) ;		// RS = 1 -> DATA
+		expanderWrite( read_port );
+		
+	}
+	pulseWrite( read_port );
+ 14c:	81 2f       	mov	r24, r17
+ 14e:	c6 df       	rcall	.-116    	; 0xdc <pulseWrite>
+	
+	// SECOND HALF
+	read_port		=	expanderRead();
+ 150:	ba df       	rcall	.-140    	; 0xc6 <expanderRead>
+	read_port		&=	0b00001101;
+ 152:	8d 70       	andi	r24, 0x0D	; 13
+	read_port		|=	swap_mask_Lower_nibble;
+ 154:	c8 2b       	or	r28, r24
+	expanderWrite( read_port );
+ 156:	8c 2f       	mov	r24, r28
+ 158:	ab df       	rcall	.-170    	; 0xb0 <expanderWrite>
+	
+	if( mode == CMD ){
+		read_port &= ~(  RS ) ;		// RS = 0 -> CMD
+		expanderWrite( read_port );
+	}
+	if( mode == DATA ){
+ 15a:	d1 30       	cpi	r29, 0x01	; 1
+ 15c:	19 f4       	brne	.+6      	; 0x164 <sendByte+0x6e>
+		read_port |= (  RS ) ;		// RS = 1 -> DATA
+ 15e:	c1 60       	ori	r28, 0x01	; 1
+		expanderWrite( read_port );
+ 160:	8c 2f       	mov	r24, r28
+ 162:	a6 df       	rcall	.-180    	; 0xb0 <expanderWrite>
+	}
+	pulseWrite( read_port );
+ 164:	8c 2f       	mov	r24, r28
+ 166:	ba df       	rcall	.-140    	; 0xdc <pulseWrite>
+    milliseconds can be achieved.
+ */
+void
+_delay_loop_2(uint16_t __count)
+{
+	__asm__ volatile (
+ 168:	80 e0       	ldi	r24, 0x00	; 0
+ 16a:	90 e0       	ldi	r25, 0x00	; 0
+ 16c:	01 97       	sbiw	r24, 0x01	; 1
+ 16e:	f1 f7       	brne	.-4      	; 0x16c <sendByte+0x76>
+	_delay_loop_2(0);
+}
+ 170:	df 91       	pop	r29
+ 172:	cf 91       	pop	r28
+ 174:	1f 91       	pop	r17
+ 176:	08 95       	ret
+
+00000178 <trrigger_i2c_lcd>:
+void trrigger_i2c_lcd(){
+
+	sendByte( 0x28 , CMD );
+ 178:	88 e2       	ldi	r24, 0x28	; 40
+ 17a:	60 e0       	ldi	r22, 0x00	; 0
+ 17c:	bc df       	rcall	.-136    	; 0xf6 <sendByte>
+	//_delay_us(150);
+	sendByte( 0x06 , CMD );
+ 17e:	86 e0       	ldi	r24, 0x06	; 6
+ 180:	60 e0       	ldi	r22, 0x00	; 0
+ 182:	b9 df       	rcall	.-142    	; 0xf6 <sendByte>
+	//_delay_us(150);
+	sendByte( 0x02 , CMD );
+ 184:	82 e0       	ldi	r24, 0x02	; 2
+ 186:	60 e0       	ldi	r22, 0x00	; 0
+ 188:	b6 df       	rcall	.-148    	; 0xf6 <sendByte>
+	//_delay_us(150);
+	sendByte( 0x01 , CMD );
+ 18a:	81 e0       	ldi	r24, 0x01	; 1
+ 18c:	60 e0       	ldi	r22, 0x00	; 0
+ 18e:	b3 df       	rcall	.-154    	; 0xf6 <sendByte>
+	//_delay_us(150);
+	sendByte( DISPLAY_OFF | CURSOR_SHOW , CMD );
+ 190:	8a e0       	ldi	r24, 0x0A	; 10
+ 192:	60 e0       	ldi	r22, 0x00	; 0
+ 194:	b0 df       	rcall	.-160    	; 0xf6 <sendByte>
+	//_delay_us(150);
+	//sendByte( DISPLAY_ON | CURSOR_SHOW , CMD );
+	//_delay_us(150);
+}
+ 196:	08 95       	ret
+
+00000198 <stabilizePCF8574T>:
+
+uint8_t stabilizePCF8574T(){
+	trrigger_i2c_lcd();
+ 198:	ef df       	rcall	.-34     	; 0x178 <trrigger_i2c_lcd>
+	uint8_t read;
+	i2c_start();
+ 19a:	74 df       	rcall	.-280    	; 0x84 <i2c_start>
+	i2c_write( 0x4E );
+ 19c:	8e e4       	ldi	r24, 0x4E	; 78
+ 19e:	5f df       	rcall	.-322    	; 0x5e <i2c_write>
+	i2c_write( 0b00001000 );	// transmit data
+ 1a0:	88 e0       	ldi	r24, 0x08	; 8
+ 1a2:	5d df       	rcall	.-326    	; 0x5e <i2c_write>
+	
+	read = i2c_readStatus();	// transmit data status
+ 1a4:	7c df       	rcall	.-264    	; 0x9e <i2c_readStatus>
+	
+	if ( read != 0x28 )
+ 1a6:	88 32       	cpi	r24, 0x28	; 40
+ 1a8:	19 f0       	breq	.+6      	; 0x1b0 <stabilizePCF8574T+0x18>
+	{
+		i2c_stop();
+ 1aa:	72 df       	rcall	.-284    	; 0x90 <i2c_stop>
+		return 0;
+ 1ac:	80 e0       	ldi	r24, 0x00	; 0
+ 1ae:	08 95       	ret
+	}
+	i2c_stop();
+ 1b0:	6f df       	rcall	.-290    	; 0x90 <i2c_stop>
+	trrigger_i2c_lcd();
+ 1b2:	e2 df       	rcall	.-60     	; 0x178 <trrigger_i2c_lcd>
+	return 1;
+ 1b4:	81 e0       	ldi	r24, 0x01	; 1
+}
+ 1b6:	08 95       	ret
+
+000001b8 <init_i2c_lcd>:
+void init_i2c_lcd(){
+	while( stabilizePCF8574T() == 0 );
+ 1b8:	ef df       	rcall	.-34     	; 0x198 <stabilizePCF8574T>
+ 1ba:	88 23       	and	r24, r24
+ 1bc:	e9 f3       	breq	.-6      	; 0x1b8 <init_i2c_lcd>
+	sendByte( 0x80 , CMD );
+ 1be:	80 e8       	ldi	r24, 0x80	; 128
+ 1c0:	60 e0       	ldi	r22, 0x00	; 0
+ 1c2:	99 df       	rcall	.-206    	; 0xf6 <sendByte>
+	sendByte( 'A' , DATA );
+ 1c4:	81 e4       	ldi	r24, 0x41	; 65
+ 1c6:	61 e0       	ldi	r22, 0x01	; 1
+ 1c8:	96 df       	rcall	.-212    	; 0xf6 <sendByte>
+	
+	sendByte( 0x81 , CMD );
+ 1ca:	81 e8       	ldi	r24, 0x81	; 129
+ 1cc:	60 e0       	ldi	r22, 0x00	; 0
+ 1ce:	93 df       	rcall	.-218    	; 0xf6 <sendByte>
+	sendByte( 'b' , DATA );
+ 1d0:	82 e6       	ldi	r24, 0x62	; 98
+ 1d2:	61 e0       	ldi	r22, 0x01	; 1
+ 1d4:	90 df       	rcall	.-224    	; 0xf6 <sendByte>
+	
+	sendByte( 0x82 , CMD );
+ 1d6:	82 e8       	ldi	r24, 0x82	; 130
+ 1d8:	60 e0       	ldi	r22, 0x00	; 0
+ 1da:	8d df       	rcall	.-230    	; 0xf6 <sendByte>
+	sendByte( 'c' , DATA );
+ 1dc:	83 e6       	ldi	r24, 0x63	; 99
+ 1de:	61 e0       	ldi	r22, 0x01	; 1
+ 1e0:	8a df       	rcall	.-236    	; 0xf6 <sendByte>
+	
+	while( stabilizePCF8574T() == 0 );
+ 1e2:	da df       	rcall	.-76     	; 0x198 <stabilizePCF8574T>
+ 1e4:	88 23       	and	r24, r24
+ 1e6:	e9 f3       	breq	.-6      	; 0x1e2 <init_i2c_lcd+0x2a>
+	sendByte( DISPLAY_ON | CURSOR_SHOW , CMD );
+ 1e8:	8e e0       	ldi	r24, 0x0E	; 14
+ 1ea:	60 e0       	ldi	r22, 0x00	; 0
+ 1ec:	84 df       	rcall	.-248    	; 0xf6 <sendByte>
+}
+ 1ee:	08 95       	ret
+
+000001f0 <i2c_lcd_Print>:
+void i2c_lcd_Print(char *str){
+ 1f0:	cf 93       	push	r28
+ 1f2:	df 93       	push	r29
+ 1f4:	ec 01       	movw	r28, r24
+	while(*str ){
+ 1f6:	88 81       	ld	r24, Y
+ 1f8:	88 23       	and	r24, r24
+ 1fa:	31 f0       	breq	.+12     	; 0x208 <i2c_lcd_Print+0x18>
+	sendByte( 'c' , DATA );
+	
+	while( stabilizePCF8574T() == 0 );
+	sendByte( DISPLAY_ON | CURSOR_SHOW , CMD );
+}
+void i2c_lcd_Print(char *str){
+ 1fc:	21 96       	adiw	r28, 0x01	; 1
+	while(*str ){
+		sendByte( *str++ , DATA );
+ 1fe:	61 e0       	ldi	r22, 0x01	; 1
+ 200:	7a df       	rcall	.-268    	; 0xf6 <sendByte>
+	
+	while( stabilizePCF8574T() == 0 );
+	sendByte( DISPLAY_ON | CURSOR_SHOW , CMD );
+}
+void i2c_lcd_Print(char *str){
+	while(*str ){
+ 202:	89 91       	ld	r24, Y+
+ 204:	88 23       	and	r24, r24
+ 206:	d9 f7       	brne	.-10     	; 0x1fe <i2c_lcd_Print+0xe>
+		sendByte( *str++ , DATA );
+	}
+}
+ 208:	df 91       	pop	r29
+ 20a:	cf 91       	pop	r28
+ 20c:	08 95       	ret
+
+0000020e <gotoXY>:
+void gotoXY( uint8_t X,  uint8_t Y )
+{
+ 20e:	cf 93       	push	r28
+ 210:	df 93       	push	r29
+ 212:	00 d0       	rcall	.+0      	; 0x214 <gotoXY+0x6>
+ 214:	cd b7       	in	r28, 0x3d	; 61
+ 216:	de b7       	in	r29, 0x3e	; 62
+char LcdTypeOne[ 4 ] = { 0 , 64 , 20 , 84 }; // 20 x 4 LCD
+sendByte( 0x80 + LcdTypeOne[ Y - 1 ] + ( X - 1 ) , CMD );
+#endif
+
+#ifdef  lcdType16x2
+if( X >= 17 ) return;
+ 218:	81 31       	cpi	r24, 0x11	; 17
+ 21a:	58 f4       	brcc	.+22     	; 0x232 <gotoXY+0x24>
+		char LcdTypeTwo[ 2 ] = { 0 , 64 }; // 16 x 2 LCD
+ 21c:	19 82       	std	Y+1, r1	; 0x01
+ 21e:	90 e4       	ldi	r25, 0x40	; 64
+ 220:	9a 83       	std	Y+2, r25	; 0x02
+		sendByte(0x80 + LcdTypeTwo[ Y - 1 ] + ( X - 1 ) , CMD );
+ 222:	81 58       	subi	r24, 0x81	; 129
+ 224:	fe 01       	movw	r30, r28
+ 226:	e6 0f       	add	r30, r22
+ 228:	f1 1d       	adc	r31, r1
+ 22a:	90 81       	ld	r25, Z
+ 22c:	89 0f       	add	r24, r25
+ 22e:	60 e0       	ldi	r22, 0x00	; 0
+ 230:	62 df       	rcall	.-316    	; 0xf6 <sendByte>
+	#endif
+
+	
+}
+ 232:	0f 90       	pop	r0
+ 234:	0f 90       	pop	r0
+ 236:	df 91       	pop	r29
+ 238:	cf 91       	pop	r28
+ 23a:	08 95       	ret
+
+0000023c <createChar>:
+void createChar(  uint8_t location, uint8_t charMap[] ) {
+ 23c:	0f 93       	push	r16
+ 23e:	1f 93       	push	r17
+ 240:	cf 93       	push	r28
+ 242:	df 93       	push	r29
+ 244:	16 2f       	mov	r17, r22
+ 246:	07 2f       	mov	r16, r23
+	location &= 0x07; // we only have 8 locations 0-7
+ 248:	87 70       	andi	r24, 0x07	; 7
+	sendByte( 0x40 | ( location << 3 ), CMD );
+ 24a:	88 0f       	add	r24, r24
+ 24c:	88 0f       	add	r24, r24
+ 24e:	88 0f       	add	r24, r24
+ 250:	80 64       	ori	r24, 0x40	; 64
+ 252:	60 e0       	ldi	r22, 0x00	; 0
+ 254:	50 df       	rcall	.-352    	; 0xf6 <sendByte>
+ 256:	80 e0       	ldi	r24, 0x00	; 0
+ 258:	90 e0       	ldi	r25, 0x00	; 0
+ 25a:	01 97       	sbiw	r24, 0x01	; 1
+ 25c:	f1 f7       	brne	.-4      	; 0x25a <createChar+0x1e>
+ 25e:	c1 2f       	mov	r28, r17
+ 260:	d0 2f       	mov	r29, r16
+ 262:	18 e0       	ldi	r17, 0x08	; 8
+	_delay_loop_2(0);
+	for ( uint8_t i = 0; i < 8 ; i++ ) {
+		sendByte( charMap[i] , DATA );
+ 264:	89 91       	ld	r24, Y+
+ 266:	61 e0       	ldi	r22, 0x01	; 1
+ 268:	46 df       	rcall	.-372    	; 0xf6 <sendByte>
+ 26a:	11 50       	subi	r17, 0x01	; 1
+}
+void createChar(  uint8_t location, uint8_t charMap[] ) {
+	location &= 0x07; // we only have 8 locations 0-7
+	sendByte( 0x40 | ( location << 3 ), CMD );
+	_delay_loop_2(0);
+	for ( uint8_t i = 0; i < 8 ; i++ ) {
+ 26c:	d9 f7       	brne	.-10     	; 0x264 <createChar+0x28>
+		sendByte( charMap[i] , DATA );
+	}
+}
+ 26e:	df 91       	pop	r29
+ 270:	cf 91       	pop	r28
+ 272:	1f 91       	pop	r17
+ 274:	0f 91       	pop	r16
+ 276:	08 95       	ret
+
+00000278 <getChar>:
+void getChar( uint8_t X, uint8_t Y, uint8_t location ){
+ 278:	cf 93       	push	r28
+ 27a:	c4 2f       	mov	r28, r20
+	gotoXY( X, Y );
+ 27c:	c8 df       	rcall	.-112    	; 0x20e <gotoXY>
+	sendByte( location , DATA);
+ 27e:	8c 2f       	mov	r24, r28
+ 280:	61 e0       	ldi	r22, 0x01	; 1
+ 282:	39 df       	rcall	.-398    	; 0xf6 <sendByte>
+}
+ 284:	cf 91       	pop	r28
+ 286:	08 95       	ret
+
+00000288 <i2c_lcd_Print_Int>:
+void i2c_lcd_Print_Int( uint8_t X, uint8_t Y, int val,int8_t field_length  )
+{
+ 288:	ef 92       	push	r14
+ 28a:	ff 92       	push	r15
+ 28c:	0f 93       	push	r16
+ 28e:	1f 93       	push	r17
+ 290:	cf 93       	push	r28
+ 292:	df 93       	push	r29
+ 294:	00 d0       	rcall	.+0      	; 0x296 <i2c_lcd_Print_Int+0xe>
+ 296:	00 d0       	rcall	.+0      	; 0x298 <i2c_lcd_Print_Int+0x10>
+ 298:	0f 92       	push	r0
+ 29a:	cd b7       	in	r28, 0x3d	; 61
+ 29c:	de b7       	in	r29, 0x3e	; 62
+ 29e:	8a 01       	movw	r16, r20
+ 2a0:	e2 2e       	mov	r14, r18
+	gotoXY( X , Y );
+ 2a2:	b5 df       	rcall	.-150    	; 0x20e <gotoXY>
+	char str[5] = {0,0,0,0,0};
+ 2a4:	fe 01       	movw	r30, r28
+ 2a6:	31 96       	adiw	r30, 0x01	; 1
+ 2a8:	85 e0       	ldi	r24, 0x05	; 5
+ 2aa:	df 01       	movw	r26, r30
+ 2ac:	1d 92       	st	X+, r1
+ 2ae:	8a 95       	dec	r24
+ 2b0:	e9 f7       	brne	.-6      	; 0x2ac <i2c_lcd_Print_Int+0x24>
+	int i = 4 ,j = 0;
+
+	//Handle negative integers
+	if( val < 0 )
+ 2b2:	11 23       	and	r17, r17
+ 2b4:	3c f4       	brge	.+14     	; 0x2c4 <i2c_lcd_Print_Int+0x3c>
+	{
+		sendByte( '-' , DATA );   //Write Negative sign
+ 2b6:	8d e2       	ldi	r24, 0x2D	; 45
+ 2b8:	61 e0       	ldi	r22, 0x01	; 1
+ 2ba:	1d df       	rcall	.-454    	; 0xf6 <sendByte>
+		val *=  ( - 1 );     //convert to positive
+ 2bc:	10 95       	com	r17
+ 2be:	01 95       	neg	r16
+ 2c0:	1f 4f       	sbci	r17, 0xFF	; 255
+ 2c2:	03 c0       	rjmp	.+6      	; 0x2ca <i2c_lcd_Print_Int+0x42>
+	}
+	else
+	{
+		sendByte( ' ', DATA );
+ 2c4:	80 e2       	ldi	r24, 0x20	; 32
+ 2c6:	61 e0       	ldi	r22, 0x01	; 1
+ 2c8:	16 df       	rcall	.-468    	; 0xf6 <sendByte>
+	}
+
+	while( val )
+ 2ca:	01 15       	cp	r16, r1
+ 2cc:	11 05       	cpc	r17, r1
+ 2ce:	69 f0       	breq	.+26     	; 0x2ea <i2c_lcd_Print_Int+0x62>
+ 2d0:	fe 01       	movw	r30, r28
+ 2d2:	36 96       	adiw	r30, 0x06	; 6
+	{
+		str[i] = val % 10;
+ 2d4:	2a e0       	ldi	r18, 0x0A	; 10
+ 2d6:	30 e0       	ldi	r19, 0x00	; 0
+ 2d8:	c8 01       	movw	r24, r16
+ 2da:	b9 01       	movw	r22, r18
+ 2dc:	71 d0       	rcall	.+226    	; 0x3c0 <__divmodhi4>
+ 2de:	82 93       	st	-Z, r24
+		val = val / 10;
+ 2e0:	06 2f       	mov	r16, r22
+ 2e2:	17 2f       	mov	r17, r23
+	else
+	{
+		sendByte( ' ', DATA );
+	}
+
+	while( val )
+ 2e4:	01 15       	cp	r16, r1
+ 2e6:	11 05       	cpc	r17, r1
+ 2e8:	b9 f7       	brne	.-18     	; 0x2d8 <i2c_lcd_Print_Int+0x50>
+		str[i] = val % 10;
+		val = val / 10;
+		i--;
+	}
+
+	if( field_length == -1 )
+ 2ea:	bf ef       	ldi	r27, 0xFF	; 255
+ 2ec:	eb 16       	cp	r14, r27
+ 2ee:	b1 f4       	brne	.+44     	; 0x31c <i2c_lcd_Print_Int+0x94>
+	while( str[j] == 0 ) j++;
+ 2f0:	89 81       	ldd	r24, Y+1	; 0x01
+ 2f2:	88 23       	and	r24, r24
+ 2f4:	49 f0       	breq	.+18     	; 0x308 <i2c_lcd_Print_Int+0x80>
+ 2f6:	ee 24       	eor	r14, r14
+ 2f8:	ff 24       	eor	r15, r15
+}
+void getChar( uint8_t X, uint8_t Y, uint8_t location ){
+	gotoXY( X, Y );
+	sendByte( location , DATA);
+}
+void i2c_lcd_Print_Int( uint8_t X, uint8_t Y, int val,int8_t field_length  )
+ 2fa:	01 e0       	ldi	r16, 0x01	; 1
+ 2fc:	10 e0       	ldi	r17, 0x00	; 0
+ 2fe:	0c 0f       	add	r16, r28
+ 300:	1d 1f       	adc	r17, r29
+ 302:	0e 0d       	add	r16, r14
+ 304:	1f 1d       	adc	r17, r15
+ 306:	18 c0       	rjmp	.+48     	; 0x338 <i2c_lcd_Print_Int+0xb0>
+		val = val / 10;
+		i--;
+	}
+
+	if( field_length == -1 )
+	while( str[j] == 0 ) j++;
+ 308:	fe 01       	movw	r30, r28
+ 30a:	32 96       	adiw	r30, 0x02	; 2
+ 30c:	80 e0       	ldi	r24, 0x00	; 0
+ 30e:	90 e0       	ldi	r25, 0x00	; 0
+ 310:	01 96       	adiw	r24, 0x01	; 1
+ 312:	21 91       	ld	r18, Z+
+ 314:	22 23       	and	r18, r18
+ 316:	e1 f3       	breq	.-8      	; 0x310 <i2c_lcd_Print_Int+0x88>
+ 318:	7c 01       	movw	r14, r24
+ 31a:	09 c0       	rjmp	.+18     	; 0x32e <i2c_lcd_Print_Int+0xa6>
+	else
+	j = 5 - field_length;
+ 31c:	8e 2d       	mov	r24, r14
+ 31e:	99 27       	eor	r25, r25
+ 320:	87 fd       	sbrc	r24, 7
+ 322:	90 95       	com	r25
+ 324:	25 e0       	ldi	r18, 0x05	; 5
+ 326:	30 e0       	ldi	r19, 0x00	; 0
+ 328:	79 01       	movw	r14, r18
+ 32a:	e8 1a       	sub	r14, r24
+ 32c:	f9 0a       	sbc	r15, r25
+
+	for( i = j; i < 5; i++ )
+ 32e:	e5 e0       	ldi	r30, 0x05	; 5
+ 330:	ee 16       	cp	r14, r30
+ 332:	f1 04       	cpc	r15, r1
+ 334:	14 f3       	brlt	.-60     	; 0x2fa <i2c_lcd_Print_Int+0x72>
+ 336:	0d c0       	rjmp	.+26     	; 0x352 <i2c_lcd_Print_Int+0xca>
+	{
+		sendByte( '0' + str[i] , DATA );
+ 338:	d8 01       	movw	r26, r16
+ 33a:	8d 91       	ld	r24, X+
+ 33c:	8d 01       	movw	r16, r26
+ 33e:	80 5d       	subi	r24, 0xD0	; 208
+ 340:	61 e0       	ldi	r22, 0x01	; 1
+ 342:	d9 de       	rcall	.-590    	; 0xf6 <sendByte>
+	if( field_length == -1 )
+	while( str[j] == 0 ) j++;
+	else
+	j = 5 - field_length;
+
+	for( i = j; i < 5; i++ )
+ 344:	08 94       	sec
+ 346:	e1 1c       	adc	r14, r1
+ 348:	f1 1c       	adc	r15, r1
+ 34a:	b5 e0       	ldi	r27, 0x05	; 5
+ 34c:	eb 16       	cp	r14, r27
+ 34e:	f1 04       	cpc	r15, r1
+ 350:	9c f3       	brlt	.-26     	; 0x338 <i2c_lcd_Print_Int+0xb0>
+	{
+		sendByte( '0' + str[i] , DATA );
+	}
+}
+ 352:	0f 90       	pop	r0
+ 354:	0f 90       	pop	r0
+ 356:	0f 90       	pop	r0
+ 358:	0f 90       	pop	r0
+ 35a:	0f 90       	pop	r0
+ 35c:	df 91       	pop	r29
+ 35e:	cf 91       	pop	r28
+ 360:	1f 91       	pop	r17
+ 362:	0f 91       	pop	r16
+ 364:	ff 90       	pop	r15
+ 366:	ef 90       	pop	r14
+ 368:	08 95       	ret
+
+0000036a <main>:
+	0b00000,
+	0b00000,
+};
+int main(void)
+{
+	i2c_init( );
+ 36a:	9c de       	rcall	.-712    	; 0xa4 <i2c_init>
+	
+	init_i2c_lcd();
+ 36c:	25 df       	rcall	.-438    	; 0x1b8 <init_i2c_lcd>
+	
+	createChar( 0, LoveFilled );
+ 36e:	80 e0       	ldi	r24, 0x00	; 0
+ 370:	60 e7       	ldi	r22, 0x70	; 112
+ 372:	70 e0       	ldi	r23, 0x00	; 0
+ 374:	63 df       	rcall	.-314    	; 0x23c <createChar>
+	
+	gotoXY(1,1);
+ 376:	81 e0       	ldi	r24, 0x01	; 1
+ 378:	61 e0       	ldi	r22, 0x01	; 1
+ 37a:	49 df       	rcall	.-366    	; 0x20e <gotoXY>
+	i2c_lcd_Print("Ameen");
+ 37c:	80 e6       	ldi	r24, 0x60	; 96
+ 37e:	90 e0       	ldi	r25, 0x00	; 0
+ 380:	37 df       	rcall	.-402    	; 0x1f0 <i2c_lcd_Print>
+	
+	
+	gotoXY(20,2);
+ 382:	84 e1       	ldi	r24, 0x14	; 20
+ 384:	62 e0       	ldi	r22, 0x02	; 2
+ 386:	43 df       	rcall	.-378    	; 0x20e <gotoXY>
+	i2c_lcd_Print("a");
+ 388:	86 e6       	ldi	r24, 0x66	; 102
+ 38a:	90 e0       	ldi	r25, 0x00	; 0
+ 38c:	31 df       	rcall	.-414    	; 0x1f0 <i2c_lcd_Print>
+	
+	getChar( 10 , 3 , 0 );
+ 38e:	8a e0       	ldi	r24, 0x0A	; 10
+ 390:	63 e0       	ldi	r22, 0x03	; 3
+ 392:	40 e0       	ldi	r20, 0x00	; 0
+ 394:	71 df       	rcall	.-286    	; 0x278 <getChar>
+	
+	i2c_lcd_Print_Int( 10,4,5,4 );
+ 396:	8a e0       	ldi	r24, 0x0A	; 10
+ 398:	64 e0       	ldi	r22, 0x04	; 4
+ 39a:	45 e0       	ldi	r20, 0x05	; 5
+ 39c:	50 e0       	ldi	r21, 0x00	; 0
+ 39e:	24 e0       	ldi	r18, 0x04	; 4
+ 3a0:	73 df       	rcall	.-282    	; 0x288 <i2c_lcd_Print_Int>
+	
+	createChar( 1 , loveEmpty );
+ 3a2:	81 e0       	ldi	r24, 0x01	; 1
+ 3a4:	68 e7       	ldi	r22, 0x78	; 120
+ 3a6:	70 e0       	ldi	r23, 0x00	; 0
+ 3a8:	49 df       	rcall	.-366    	; 0x23c <createChar>
+	
+	gotoXY( 1, 2 );
+ 3aa:	81 e0       	ldi	r24, 0x01	; 1
+ 3ac:	62 e0       	ldi	r22, 0x02	; 2
+ 3ae:	2f df       	rcall	.-418    	; 0x20e <gotoXY>
+	i2c_lcd_Print("Veluvil");
+ 3b0:	88 e6       	ldi	r24, 0x68	; 104
+ 3b2:	90 e0       	ldi	r25, 0x00	; 0
+ 3b4:	1d df       	rcall	.-454    	; 0x1f0 <i2c_lcd_Print>
+	
+	getChar( 10 , 1 , 1 );
+ 3b6:	8a e0       	ldi	r24, 0x0A	; 10
+ 3b8:	61 e0       	ldi	r22, 0x01	; 1
+ 3ba:	41 e0       	ldi	r20, 0x01	; 1
+ 3bc:	5d df       	rcall	.-326    	; 0x278 <getChar>
+ 3be:	ff cf       	rjmp	.-2      	; 0x3be <main+0x54>
+
+000003c0 <__divmodhi4>:
+ 3c0:	97 fb       	bst	r25, 7
+ 3c2:	09 2e       	mov	r0, r25
+ 3c4:	07 26       	eor	r0, r23
+ 3c6:	0a d0       	rcall	.+20     	; 0x3dc <__divmodhi4_neg1>
+ 3c8:	77 fd       	sbrc	r23, 7
+ 3ca:	04 d0       	rcall	.+8      	; 0x3d4 <__divmodhi4_neg2>
+ 3cc:	0c d0       	rcall	.+24     	; 0x3e6 <__udivmodhi4>
+ 3ce:	06 d0       	rcall	.+12     	; 0x3dc <__divmodhi4_neg1>
+ 3d0:	00 20       	and	r0, r0
+ 3d2:	1a f4       	brpl	.+6      	; 0x3da <__divmodhi4_exit>
+
+000003d4 <__divmodhi4_neg2>:
+ 3d4:	70 95       	com	r23
+ 3d6:	61 95       	neg	r22
+ 3d8:	7f 4f       	sbci	r23, 0xFF	; 255
+
+000003da <__divmodhi4_exit>:
+ 3da:	08 95       	ret
+
+000003dc <__divmodhi4_neg1>:
+ 3dc:	f6 f7       	brtc	.-4      	; 0x3da <__divmodhi4_exit>
+ 3de:	90 95       	com	r25
+ 3e0:	81 95       	neg	r24
+ 3e2:	9f 4f       	sbci	r25, 0xFF	; 255
+ 3e4:	08 95       	ret
+
+000003e6 <__udivmodhi4>:
+ 3e6:	aa 1b       	sub	r26, r26
+ 3e8:	bb 1b       	sub	r27, r27
+ 3ea:	51 e1       	ldi	r21, 0x11	; 17
+ 3ec:	07 c0       	rjmp	.+14     	; 0x3fc <__udivmodhi4_ep>
+
+000003ee <__udivmodhi4_loop>:
+ 3ee:	aa 1f       	adc	r26, r26
+ 3f0:	bb 1f       	adc	r27, r27
+ 3f2:	a6 17       	cp	r26, r22
+ 3f4:	b7 07       	cpc	r27, r23
+ 3f6:	10 f0       	brcs	.+4      	; 0x3fc <__udivmodhi4_ep>
+ 3f8:	a6 1b       	sub	r26, r22
+ 3fa:	b7 0b       	sbc	r27, r23
+
+000003fc <__udivmodhi4_ep>:
+ 3fc:	88 1f       	adc	r24, r24
+ 3fe:	99 1f       	adc	r25, r25
+ 400:	5a 95       	dec	r21
+ 402:	a9 f7       	brne	.-22     	; 0x3ee <__udivmodhi4_loop>
+ 404:	80 95       	com	r24
+ 406:	90 95       	com	r25
+ 408:	bc 01       	movw	r22, r24
+ 40a:	cd 01       	movw	r24, r26
+ 40c:	08 95       	ret
+
+0000040e <_exit>:
+ 40e:	f8 94       	cli
+
+00000410 <__stop_program>:
+ 410:	ff cf       	rjmp	.-2      	; 0x410 <__stop_program>
